@@ -23,8 +23,10 @@ export const SidebarMenu = ({ closeSidebar }) => {
   };
 
   const logout = () => {
-    navigate("/");
-    dispatch(userLogout());
+    if (window.confirm("Выйти из блога?")) {
+      navigate("/");
+      dispatch(userLogout());
+    }
   };
 
   const showProfile = () => {

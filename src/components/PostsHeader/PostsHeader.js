@@ -32,8 +32,10 @@ export const PostsHeader = () => {
   };
 
   const logout = () => {
-    navigate("/");
-    dispatch(userLogout());
+    if (window.confirm("Выйти из блога?")) {
+      navigate("/");
+      dispatch(userLogout());
+    }
   };
 
   const redirectToProfile = () => {
@@ -54,6 +56,10 @@ export const PostsHeader = () => {
   const handleInputValue = (event) => {
     const { value } = event.target;
     setInputValue(value);
+  };
+
+  const redirectToMainPage = () => {
+    navigate("/");
   };
 
   useEffect(() => {
@@ -79,7 +85,11 @@ export const PostsHeader = () => {
           </>
         )}
       </div>
-      {data && data.fullName && <span>{data.fullName.split(" ")[0]} blog</span>}
+      {data && data.fullName && (
+        <span onClick={redirectToMainPage}>
+          {data.fullName.split(" ")[0]} blog
+        </span>
+      )}
       {!visible && (
         <div className={styles.posts__header_icons}>
           <div
